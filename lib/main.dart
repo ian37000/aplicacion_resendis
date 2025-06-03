@@ -3,7 +3,7 @@ import 'package:project_resendis/data/notifiers.dart';
 import 'package:project_resendis/views/pages/start_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:project_resendis/styles/app_theme.dart'; 
+import 'package:project_resendis/styles/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,10 +34,7 @@ class MainApp extends StatelessWidget {
 class ThemeWrapper extends StatelessWidget {
   final Widget child;
 
-  const ThemeWrapper({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const ThemeWrapper({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
