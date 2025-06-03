@@ -4,7 +4,7 @@
             "outputFile": "com.example.project_resendis.app-mergeDebugResources-33:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\luisa\\Downloads\\project_resendis\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\Users\\luisa\\Downloads\\Proyecto_decorado\\project_resendis\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
