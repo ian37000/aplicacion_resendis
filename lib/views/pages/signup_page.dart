@@ -5,6 +5,8 @@ import 'package:project_resendis/styles/app_colors.dart';
 import 'package:project_resendis/widgets/gradient_background.dart';
 import 'package:project_resendis/widgets/custom_text_field.dart';
 import 'package:project_resendis/widgets/custom_button.dart';
+import 'package:project_resendis/widgets/settings_dialog.dart';
+import 'package:project_resendis/data/user_preferences.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -86,6 +88,13 @@ class _SignupPageState extends State<SignupPage> {
     super.dispose();
   }
 
+  void _openSettingsDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => const SettingsDialog(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -98,7 +107,7 @@ class _SignupPageState extends State<SignupPage> {
         child: SafeArea(
           child: Column(
             children: [
-              // Barra de navegación personalizada
+              // Barra de navegación personalizada con botón de configuración
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
                 child: Row(
@@ -121,6 +130,19 @@ class _SignupPageState extends State<SignupPage> {
                             offset: const Offset(0, 2),
                           ),
                         ],
+                      ),
+                    ),
+                    const Spacer(),
+                    // Botón de configuración (engranaje)
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.settings, color: Colors.white),
+                        onPressed: _openSettingsDialog,
+                        tooltip: 'Configuración',
                       ),
                     ),
                   ],
