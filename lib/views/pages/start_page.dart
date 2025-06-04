@@ -62,11 +62,9 @@ class _StartPageState extends State<StartPage> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder:
-                  (context) => AppPage(
-                    isAdmin: userData['isAdmin'] ?? false,
-                    userId: userDoc.id, // Add this
-                  ),
+              builder: (context) => AppPage(
+                isAdmin: userData['isAdmin'] ?? false, // Pass the admin status
+              ),
             ),
           );
         }

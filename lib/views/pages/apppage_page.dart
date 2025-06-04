@@ -12,8 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AppPage extends StatefulWidget {
   final bool isAdmin;
-  final String userId;
-  const AppPage({super.key, this.isAdmin = false, required this.userId});
+  const AppPage({super.key, this.isAdmin = false});
 
   @override
   State<AppPage> createState() => _AppPageState();
@@ -500,6 +499,25 @@ class _AppPageState extends State<AppPage> {
               ),
             ],
           ),
+          bottomNavigationBar: widget.isAdmin ? BottomNavigationBar(
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.camera_alt),
+                label: 'Cámara',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.admin_panel_settings),
+                label: 'Panel Admin',
+              ),
+            ],
+            onTap: (index) {
+              // Handle navigation between camera and admin panel
+              if (index == 1) {
+                // Navigate to admin panel
+                // You'll need to create an AdminPanel page
+              }
+            },
+          ) : null,
         );
       },
     );
