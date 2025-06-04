@@ -544,7 +544,9 @@ class _AppPageState extends State<AppPage> {
       });
       
       // Add this: Handle points for the new item
-      await _handleNewItem(responseText);
+      if (responseText != null) {
+        await _handleNewItem(responseText);
+      }
       
     } catch (e) {
       if (mounted) {

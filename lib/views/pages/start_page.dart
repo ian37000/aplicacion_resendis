@@ -12,7 +12,7 @@ import 'package:project_resendis/widgets/custom_button.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
-
+  
   @override
   State<StartPage> createState() => _StartPageState();
 }
@@ -63,7 +63,8 @@ class _StartPageState extends State<StartPage> {
             context,
             MaterialPageRoute(
               builder: (context) => AppPage(
-                isAdmin: userData['isAdmin'] ?? false, // Pass the admin status
+                isAdmin: userData['isAdmin'] ?? false,
+                userId: userDoc.id, // Pass the admin status
               ),
             ),
           );
