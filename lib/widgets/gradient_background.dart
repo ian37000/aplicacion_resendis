@@ -18,8 +18,23 @@ class GradientBackground extends StatelessWidget {
       builder: (context, themeType, _) {
         final isDarkMode = Theme.of(context).brightness == Brightness.dark;
         
-        // Determinar los colores del gradiente según el tema seleccionado
-        List<Color> gradientColors = colors ?? _getThemeColors(themeType, isDarkMode);
+        // Si se proporcionan colores personalizados, usarlos
+        if (colors != null) {
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 500),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: colors!,
+              ),
+            ),
+            child: child,
+          );
+        }
+        
+        // Usar colores específicos para cada tema
+        final themeColors = _getThemeColors(themeType, isDarkMode);
         
         return AnimatedContainer(
           duration: const Duration(milliseconds: 500),
@@ -27,7 +42,7 @@ class GradientBackground extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: gradientColors,
+              colors: themeColors,
             ),
           ),
           child: child,

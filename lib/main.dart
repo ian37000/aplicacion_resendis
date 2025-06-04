@@ -6,7 +6,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:project_resendis/styles/app_theme.dart';
 import 'package:project_resendis/widgets/settings_button.dart';
-//un lefsito
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter/cupertino.dart';
+
 //Hola luis
 //hola evan
 void main() async {
@@ -43,6 +45,20 @@ class MainApp extends StatelessWidget {
                       theme: _getThemeData(themeType, false, fontFamily, fontSize),
                       darkTheme: _getThemeData(themeType, true, fontFamily, fontSize),
                       themeMode: _getThemeMode(themeType),
+                      // Agregar estas líneas
+                      localizationsDelegates: const [
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate,
+                      ],
+                      supportedLocales: const [
+                        Locale('es'), // Español
+                        Locale('en'), // Inglés
+                        Locale('zh'), // Chino
+                        Locale('de'), // Alemán
+                        Locale('fr'), // Francés
+                      ],
+                      locale: _getLocale(language), // Agregar esta línea
                       home: const AppWrapper(child: StartPage()),
                     );
                   },
@@ -184,3 +200,19 @@ class AppWrapper extends StatelessWidget {
 }
 
 //holaaaaaaaaaaaaaa
+
+// Agregar esta función
+Locale _getLocale(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.spanish:
+      return const Locale('es');
+    case AppLanguage.english:
+      return const Locale('en');
+    case AppLanguage.chinese:
+      return const Locale('zh');
+    case AppLanguage.german:
+      return const Locale('de');
+    case AppLanguage.french:
+      return const Locale('fr');
+  }
+}
