@@ -61,7 +61,13 @@ class _StartPageState extends State<StartPage> {
         if (mounted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const AppPage()),
+            MaterialPageRoute(
+              builder:
+                  (context) => AppPage(
+                    isAdmin: userData['isAdmin'] ?? false,
+                    userId: userDoc.id, // Add this
+                  ),
+            ),
           );
         }
       } else {
@@ -91,9 +97,10 @@ class _StartPageState extends State<StartPage> {
 
     return Scaffold(
       body: GradientBackground(
-        colors: isDarkMode
-            ? [Colors.grey.shade900, Colors.black]
-            : [Colors.teal.shade300, Colors.teal.shade700],
+        colors:
+            isDarkMode
+                ? [Colors.grey.shade900, Colors.black]
+                : [Colors.teal.shade300, Colors.teal.shade700],
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -102,10 +109,7 @@ class _StartPageState extends State<StartPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Logo animado
-                  Hero(
-                    tag: 'app_logo',
-                    child: AnimatedLogo(size: 120),
-                  ),
+                  Hero(tag: 'app_logo', child: AnimatedLogo(size: 120)),
                   const SizedBox(height: 30),
 
                   // Título y subtítulo con animación
@@ -178,9 +182,10 @@ class _StartPageState extends State<StartPage> {
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? Colors.grey.shade800.withOpacity(0.8)
-                            : Colors.white.withOpacity(0.9),
+                        color:
+                            isDarkMode
+                                ? Colors.grey.shade800.withOpacity(0.8)
+                                : Colors.white.withOpacity(0.9),
                         borderRadius: BorderRadius.circular(
                           AppDimensions.borderRadiusLarge,
                         ),
@@ -192,9 +197,10 @@ class _StartPageState extends State<StartPage> {
                           ),
                         ],
                         border: Border.all(
-                          color: isDarkMode
-                              ? Colors.teal.withOpacity(0.3)
-                              : Colors.teal.shade200,
+                          color:
+                              isDarkMode
+                                  ? Colors.teal.withOpacity(0.3)
+                                  : Colors.teal.shade200,
                           width: 1.5,
                         ),
                       ),
@@ -227,7 +233,9 @@ class _StartPageState extends State<StartPage> {
                                   borderRadius: BorderRadius.circular(
                                     AppDimensions.borderRadiusSmall,
                                   ),
-                                  border: Border.all(color: Colors.red.shade300),
+                                  border: Border.all(
+                                    color: Colors.red.shade300,
+                                  ),
                                 ),
                                 child: Row(
                                   children: [
@@ -239,7 +247,9 @@ class _StartPageState extends State<StartPage> {
                                     Expanded(
                                       child: Text(
                                         _errorMessage,
-                                        style: const TextStyle(color: Colors.red),
+                                        style: const TextStyle(
+                                          color: Colors.red,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -253,9 +263,10 @@ class _StartPageState extends State<StartPage> {
                           CustomButton(
                             text: 'Iniciar Sesión',
                             onPressed: _isLoading ? () {} : _login,
-                            backgroundColor: isDarkMode
-                                ? Colors.teal.shade700
-                                : Colors.teal.shade500,
+                            backgroundColor:
+                                isDarkMode
+                                    ? Colors.teal.shade700
+                                    : Colors.teal.shade500,
                             icon: Icons.login,
                             height: 50,
                           ),
@@ -272,10 +283,7 @@ class _StartPageState extends State<StartPage> {
                     duration: const Duration(milliseconds: 1200),
                     curve: Curves.easeOut,
                     builder: (context, value, child) {
-                      return Opacity(
-                        opacity: value,
-                        child: child,
-                      );
+                      return Opacity(opacity: value, child: child);
                     },
                     child: TextButton(
                       onPressed: () {
@@ -288,10 +296,17 @@ class _StartPageState extends State<StartPage> {
                       },
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 16,
+                        ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
-                          side: BorderSide(color: Colors.white.withOpacity(0.3)),
+                          borderRadius: BorderRadius.circular(
+                            AppDimensions.borderRadiusMedium,
+                          ),
+                          side: BorderSide(
+                            color: Colors.white.withOpacity(0.3),
+                          ),
                         ),
                       ),
                       child: const Text(

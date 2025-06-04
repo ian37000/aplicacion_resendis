@@ -10,7 +10,9 @@ import 'package:project_resendis/widgets/custom_card.dart';
 import 'package:project_resendis/data/notifiers.dart'; // Añadir esta importación
 
 class AppPage extends StatefulWidget {
-  const AppPage({super.key});
+  final bool isAdmin;
+  final String userId;
+  const AppPage({super.key, this.isAdmin = false, required this.userId});
 
   @override
   State<AppPage> createState() => _AppPageState();
@@ -36,6 +38,22 @@ class _AppPageState extends State<AppPage> {
   void initState() {
     super.initState();
     _initializeCamera();
+    _loadUserData(); // Add this line
+  }
+
+  Future<void> _loadUserData() async {
+    try {
+      final userData = await _firestore.collection('users').doc(widget.userId).get();
+      if (userData.exists) {
+        setState(() {
+          _points = userData.data()?['points'] ?? 0;
+          _lastResetDate = (userData.data()?['lastResetDate'] as Timestamp?)?.toDate() ?? DateTime.now();
+          _scannedItems = Set<String>.from(userData.data()?['scannedItems'] ?? []);
+        });
+      }
+    } catch (e) {
+      print('Error loading user data: $e');
+    }
   }
 
   Future<void> _initializeCamera() async {
@@ -489,6 +507,10 @@ class _AppPageState extends State<AppPage> {
       setState(() {
         _analysisResult = responseText;
       });
+      
+      // Add this: Handle points for the new item
+      await _handleNewItem(responseText);
+      
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -500,6 +522,35 @@ class _AppPageState extends State<AppPage> {
         );
       }
       print('Error details: $e');
+    }
+  }
+
+  Future<void> _handleNewItem(String itemName) async {
+    // Check if it's a new day
+    final now = DateTime.now();
+    if (now.day != _lastResetDate.day || now.month != _lastResetDate.month || now.year != _lastResetDate.year) {
+      _scannedItems.clear();
+      _lastResetDate = now;
+      
+      // Update last reset date in Firebase
+      await _firestore.collection('users').doc(widget.userId).update({
+        'lastResetDate': _lastResetDate,
+        'scannedItems': []
+      });
+    }
+
+    // Check if item is new for today
+    if (!_scannedItems.contains(itemName)) {
+      setState(() {
+        _points += 100;
+        _scannedItems.add(itemName);
+      });
+
+      // Update points and scanned items in Firebase
+      await _firestore.collection('users').doc(widget.userId).update({
+        'points': _points,
+        'scannedItems': _scannedItems.toList(),
+      });
     }
   }
 }
