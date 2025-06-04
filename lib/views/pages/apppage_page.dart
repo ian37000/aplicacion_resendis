@@ -12,7 +12,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AppPage extends StatefulWidget {
   final bool isAdmin;
-  const AppPage({super.key, this.isAdmin = false});
+  final String userId;
+  const AppPage({super.key, this.isAdmin = false, required this.userId});
 
   @override
   State<AppPage> createState() => _AppPageState();
