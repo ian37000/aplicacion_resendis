@@ -44,19 +44,24 @@ class _AppPageState extends State<AppPage> {
 
   Future<void> _loadUserData() async {
     try {
-      final userData = await _firestore.collection('users').doc(widget.userId).get();
+      final userData =
+          await _firestore.collection('users').doc(widget.userId).get();
       if (userData.exists) {
         setState(() {
           _points = userData.data()?['points'] ?? 0;
-          _lastResetDate = (userData.data()?['lastResetDate'] as Timestamp?)?.toDate() ?? DateTime.now();
-          _scannedItems = Set<String>.from(userData.data()?['scannedItems'] ?? []);
+          _lastResetDate =
+              (userData.data()?['lastResetDate'] as Timestamp?)?.toDate() ??
+              DateTime.now();
+          _scannedItems = Set<String>.from(
+            userData.data()?['scannedItems'] ?? [],
+          );
         });
       } else {
         // Initialize new user data
         await _firestore.collection('users').doc(widget.userId).set({
           'points': 0,
           'lastResetDate': Timestamp.fromDate(DateTime.now()),
-          'scannedItems': []
+          'scannedItems': [],
         });
       }
     } catch (e) {
@@ -132,19 +137,14 @@ class _AppPageState extends State<AppPage> {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: isDarkMode
-                        ? [
-                            Colors.black,
-                            Colors.blueGrey.shade900,
-                          ]
-                        : [
-                            Colors.blue.shade100,
-                            Colors.teal.shade200,
-                          ],
+                    colors:
+                        isDarkMode
+                            ? [Colors.black, Colors.blueGrey.shade900]
+                            : [Colors.blue.shade100, Colors.teal.shade200],
                   ),
                 ),
               ),
-              
+
               // Contenido principal
               SafeArea(
                 child: Column(
@@ -158,15 +158,17 @@ class _AppPageState extends State<AppPage> {
                           vertical: AppDimensions.paddingSmall,
                         ),
                         decoration: BoxDecoration(
-                          color: isDarkMode
-                              ? Colors.black.withOpacity(0.5)
-                              : Colors.white.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
+                          color:
+                              isDarkMode
+                                  ? Colors.black.withOpacity(0.5)
+                                  : Colors.white.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(
+                            AppDimensions.borderRadiusMedium,
+                          ),
                           boxShadow: [
                             BoxShadow(
-                              color: isDarkMode
-                                  ? Colors.black26
-                                  : Colors.black12,
+                              color:
+                                  isDarkMode ? Colors.black26 : Colors.black12,
                               blurRadius: 8,
                               spreadRadius: 1,
                             ),
@@ -184,7 +186,10 @@ class _AppPageState extends State<AppPage> {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: isDarkMode ? Colors.amber.withOpacity(0.2) : Colors.amber.shade100,
+                                color:
+                                    isDarkMode
+                                        ? Colors.amber.withOpacity(0.2)
+                                        : Colors.amber.shade100,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Row(
@@ -199,7 +204,10 @@ class _AppPageState extends State<AppPage> {
                                   Text(
                                     '$_points pts',
                                     style: TextStyle(
-                                      color: isDarkMode ? Colors.amber : Colors.amber.shade900,
+                                      color:
+                                          isDarkMode
+                                              ? Colors.amber
+                                              : Colors.amber.shade900,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -211,8 +219,13 @@ class _AppPageState extends State<AppPage> {
                             Expanded(
                               child: Text(
                                 'Recycling Assistant',
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: isDarkMode ? Colors.white : Colors.black87,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleMedium?.copyWith(
+                                  color:
+                                      isDarkMode
+                                          ? Colors.white
+                                          : Colors.black87,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 overflow: TextOverflow.ellipsis,
@@ -221,11 +234,13 @@ class _AppPageState extends State<AppPage> {
                             // Botón para cambiar el tema
                             IconButton(
                               onPressed: () {
-                                isDarkModeNotifier.value = !isDarkModeNotifier.value;
+                                isDarkModeNotifier.value =
+                                    !isDarkModeNotifier.value;
                               },
                               icon: Icon(
                                 isDarkMode ? Icons.light_mode : Icons.dark_mode,
-                                color: isDarkMode ? Colors.amber : Colors.indigo,
+                                color:
+                                    isDarkMode ? Colors.amber : Colors.indigo,
                               ),
                               tooltip: 'Cambiar tema',
                             ),
@@ -233,7 +248,7 @@ class _AppPageState extends State<AppPage> {
                         ),
                       ),
                     ),
-                    
+
                     // Vista de la cámara
                     Expanded(
                       child: Padding(
@@ -241,50 +256,64 @@ class _AppPageState extends State<AppPage> {
                         child: FutureBuilder<void>(
                           future: _initializeControllerFuture,
                           builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.done &&
+                            if (snapshot.connectionState ==
+                                    ConnectionState.done &&
                                 _isCameraReady &&
                                 _controller != null) {
                               return Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(AppDimensions.borderRadiusLarge),
+                                  borderRadius: BorderRadius.circular(
+                                    AppDimensions.borderRadiusLarge,
+                                  ),
                                   border: Border.all(
-                                    color: isDarkMode
-                                        ? AppColors.primaryColor
-                                        : Colors.teal.shade400,
+                                    color:
+                                        isDarkMode
+                                            ? AppColors.primaryColor
+                                            : Colors.teal.shade400,
                                     width: 3,
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: isDarkMode
-                                          ? AppColors.primaryColor.withOpacity(0.3)
-                                          : Colors.teal.shade200.withOpacity(0.5),
+                                      color:
+                                          isDarkMode
+                                              ? AppColors.primaryColor
+                                                  .withOpacity(0.3)
+                                              : Colors.teal.shade200
+                                                  .withOpacity(0.5),
                                       blurRadius: 15,
                                       spreadRadius: 2,
                                     ),
                                   ],
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(AppDimensions.borderRadiusLarge),
+                                  borderRadius: BorderRadius.circular(
+                                    AppDimensions.borderRadiusLarge,
+                                  ),
                                   child: Stack(
                                     fit: StackFit.expand,
                                     children: [
                                       CameraPreview(_controller!),
-                                      
+
                                       // Overlay con instrucciones adaptado al tema
                                       Positioned(
                                         top: 0,
                                         left: 0,
                                         right: 0,
                                         child: Container(
-                                          padding: EdgeInsets.all(AppDimensions.paddingMedium),
+                                          padding: EdgeInsets.all(
+                                            AppDimensions.paddingMedium,
+                                          ),
                                           decoration: BoxDecoration(
                                             gradient: LinearGradient(
                                               begin: Alignment.topCenter,
                                               end: Alignment.bottomCenter,
                                               colors: [
                                                 isDarkMode
-                                                    ? Colors.black.withOpacity(0.7)
-                                                    : Colors.teal.shade700.withOpacity(0.7),
+                                                    ? Colors.black.withOpacity(
+                                                      0.7,
+                                                    )
+                                                    : Colors.teal.shade700
+                                                        .withOpacity(0.7),
                                                 Colors.transparent,
                                               ],
                                             ),
@@ -299,7 +328,7 @@ class _AppPageState extends State<AppPage> {
                                           ),
                                         ),
                                       ),
-                                      
+
                                       // Marco de enfoque adaptado al tema
                                       Center(
                                         child: Container(
@@ -307,16 +336,19 @@ class _AppPageState extends State<AppPage> {
                                           height: 200,
                                           decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.teal.shade400,
+                                              color:
+                                                  isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.teal.shade400,
                                               width: 2,
                                             ),
-                                            borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
+                                            borderRadius: BorderRadius.circular(
+                                              AppDimensions.borderRadiusMedium,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      
+
                                       // Indicador de análisis
                                       if (_isAnalyzing)
                                         Container(
@@ -324,10 +356,13 @@ class _AppPageState extends State<AppPage> {
                                           child: Center(
                                             child: LoadingIndicator(
                                               message: 'Analizando imagen...',
-                                              color: isDarkMode
-                                                  ? AppColors.primaryColor
-                                                  : Colors.teal.shade400,
-                                              textColor: Colors.white, // Añadir esta línea
+                                              color:
+                                                  isDarkMode
+                                                      ? AppColors.primaryColor
+                                                      : Colors.teal.shade400,
+                                              textColor:
+                                                  Colors
+                                                      .white, // Añadir esta línea
                                             ),
                                           ),
                                         ),
@@ -339,9 +374,10 @@ class _AppPageState extends State<AppPage> {
                               return Center(
                                 child: LoadingIndicator(
                                   message: 'Inicializando cámara...',
-                                  color: isDarkMode
-                                      ? AppColors.primaryColor
-                                      : Colors.teal.shade400,
+                                  color:
+                                      isDarkMode
+                                          ? AppColors.primaryColor
+                                          : Colors.teal.shade400,
                                   textColor: Colors.white, // Añadir esta línea
                                 ),
                               );
@@ -350,7 +386,7 @@ class _AppPageState extends State<AppPage> {
                         ),
                       ),
                     ),
-                    
+
                     // Resultado del análisis adaptado al tema
                     if (_analysisResult != null)
                       Padding(
@@ -359,22 +395,34 @@ class _AppPageState extends State<AppPage> {
                           child: Stack(
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(AppDimensions.paddingMedium),
+                                padding: EdgeInsets.all(
+                                  AppDimensions.paddingMedium,
+                                ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       'Resultado del análisis:',
-                                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.titleMedium?.copyWith(
                                         fontWeight: FontWeight.bold,
-                                        color: isDarkMode ? Colors.white : Colors.black87,
+                                        color:
+                                            isDarkMode
+                                                ? Colors.white
+                                                : Colors.black87,
                                       ),
                                     ),
-                                    SizedBox(height: AppDimensions.paddingSmall),
+                                    SizedBox(
+                                      height: AppDimensions.paddingSmall,
+                                    ),
                                     Text(
                                       _analysisResult!,
                                       style: TextStyle(
-                                        color: isDarkMode ? Colors.white70 : Colors.black87,
+                                        color:
+                                            isDarkMode
+                                                ? Colors.white70
+                                                : Colors.black87,
                                       ),
                                     ),
                                   ],
@@ -386,7 +434,10 @@ class _AppPageState extends State<AppPage> {
                                 child: IconButton(
                                   icon: Icon(
                                     Icons.close,
-                                    color: isDarkMode ? Colors.white54 : Colors.grey,
+                                    color:
+                                        isDarkMode
+                                            ? Colors.white54
+                                            : Colors.grey,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -399,33 +450,38 @@ class _AppPageState extends State<AppPage> {
                           ),
                         ),
                       ),
-                    
+
                     // Botón de captura adaptado al tema
                     Padding(
                       padding: EdgeInsets.all(AppDimensions.paddingMedium),
                       child: SizedBox(
                         width: double.infinity,
                         child: Material(
-                          borderRadius: BorderRadius.circular(AppDimensions.borderRadiusLarge),
+                          borderRadius: BorderRadius.circular(
+                            AppDimensions.borderRadiusLarge,
+                          ),
                           color: Colors.transparent,
                           child: InkWell(
-                            borderRadius: BorderRadius.circular(AppDimensions.borderRadiusLarge),
+                            borderRadius: BorderRadius.circular(
+                              AppDimensions.borderRadiusLarge,
+                            ),
                             onTap: () async {
                               try {
                                 if (_controller != null &&
                                     _initializeControllerFuture != null) {
                                   await _initializeControllerFuture;
-                                  
+
                                   setState(() {
                                     _isAnalyzing = true;
                                   });
-                                  
-                                  final image = await _controller!.takePicture();
-                                  
+
+                                  final image =
+                                      await _controller!.takePicture();
+
                                   if (mounted) {
                                     await analyzeImage(image.path);
                                   }
-                                  
+
                                   setState(() {
                                     _isAnalyzing = false;
                                   });
@@ -434,7 +490,7 @@ class _AppPageState extends State<AppPage> {
                                 setState(() {
                                   _isAnalyzing = false;
                                 });
-                                
+
                                 if (mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -454,16 +510,31 @@ class _AppPageState extends State<AppPage> {
                                 gradient: LinearGradient(
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
-                                  colors: isDarkMode
-                                      ? [AppColors.primaryColor, AppColors.primaryColor.withOpacity(0.7)]
-                                      : [Colors.teal.shade400, Colors.teal.shade300],
+                                  colors:
+                                      isDarkMode
+                                          ? [
+                                            AppColors.primaryColor,
+                                            AppColors.primaryColor.withOpacity(
+                                              0.7,
+                                            ),
+                                          ]
+                                          : [
+                                            Colors.teal.shade400,
+                                            Colors.teal.shade300,
+                                          ],
                                 ),
-                                borderRadius: BorderRadius.circular(AppDimensions.borderRadiusLarge),
+                                borderRadius: BorderRadius.circular(
+                                  AppDimensions.borderRadiusLarge,
+                                ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: isDarkMode
-                                        ? AppColors.primaryColor.withOpacity(0.3)
-                                        : Colors.teal.shade200.withOpacity(0.5),
+                                    color:
+                                        isDarkMode
+                                            ? AppColors.primaryColor
+                                                .withOpacity(0.3)
+                                            : Colors.teal.shade200.withOpacity(
+                                              0.5,
+                                            ),
                                     blurRadius: 10,
                                     spreadRadius: 1,
                                   ),
@@ -474,10 +545,7 @@ class _AppPageState extends State<AppPage> {
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      Icons.camera_alt,
-                                      color: Colors.white,
-                                    ),
+                                    Icon(Icons.camera_alt, color: Colors.white),
                                     SizedBox(width: AppDimensions.paddingSmall),
                                     Text(
                                       'Tomar Foto',
@@ -500,25 +568,28 @@ class _AppPageState extends State<AppPage> {
               ),
             ],
           ),
-          bottomNavigationBar: widget.isAdmin ? BottomNavigationBar(
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.camera_alt),
-                label: 'Cámara',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.admin_panel_settings),
-                label: 'Panel Admin',
-              ),
-            ],
-            onTap: (index) {
-              // Handle navigation between camera and admin panel
-              if (index == 1) {
-                // Navigate to admin panel
-                // You'll need to create an AdminPanel page
-              }
-            },
-          ) : null,
+          bottomNavigationBar:
+              widget.isAdmin
+                  ? BottomNavigationBar(
+                    items: const [
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.camera_alt),
+                        label: 'Cámara',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.admin_panel_settings),
+                        label: 'Panel Admin',
+                      ),
+                    ],
+                    onTap: (index) {
+                      // Handle navigation between camera and admin panel
+                      if (index == 1) {
+                        // Navigate to admin panel
+                        // You'll need to create an AdminPanel page
+                      }
+                    },
+                  )
+                  : null,
         );
       },
     );
@@ -529,7 +600,7 @@ class _AppPageState extends State<AppPage> {
       final bytes = await File(imagePath).readAsBytes();
 
       final prompt = TextPart(
-        'Analyze this item and tell me: 1. Which color recycling bin it should go in (options: blue, green, yellow, gray, or black), 2. What materials it is made of, 3. Ways to recycle it. 4.Say everything in Spanish. Keep the response brief and direct.',
+        '(start with just the name of the item) Analyze this item and tell me: 1. Which color recycling bin it should go in (options: blue, green, yellow, gray, or black), 2. What materials it is made of, 3. Ways to recycle it. 4.Say everything in Spanish. Keep the response brief and direct.',
       );
       final imagePart = DataPart('image/jpeg', bytes);
 
@@ -542,12 +613,11 @@ class _AppPageState extends State<AppPage> {
       setState(() {
         _analysisResult = responseText;
       });
-      
+
       // Add this: Handle points for the new item
       if (responseText != null) {
         await _handleNewItem(responseText);
       }
-      
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -565,27 +635,29 @@ class _AppPageState extends State<AppPage> {
   Future<void> _handleNewItem(String responseText) async {
     // Extract the item type from the response (first line or relevant part)
     final itemType = responseText.split('.')[0].trim();
-    
+
     // Check if it's a new day
     final now = DateTime.now();
-    if (now.day != _lastResetDate.day || now.month != _lastResetDate.month || now.year != _lastResetDate.year) {
+    if (now.day != _lastResetDate.day ||
+        now.month != _lastResetDate.month ||
+        now.year != _lastResetDate.year) {
       _scannedItems.clear();
       _lastResetDate = now;
-      
+
       // Update last reset date in Firebase
       await _firestore.collection('users').doc(widget.userId).update({
         'lastResetDate': Timestamp.fromDate(_lastResetDate),
-        'scannedItems': []
+        'scannedItems': [],
       });
     }
-  
+
     // Check if item is new for today
     if (!_scannedItems.contains(itemType)) {
       setState(() {
         _points += 100;
         _scannedItems.add(itemType);
       });
-  
+
       // Update points and scanned items in Firebase
       try {
         await _firestore.collection('users').doc(widget.userId).update({
