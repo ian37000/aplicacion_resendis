@@ -20,6 +20,11 @@ class _AppPageState extends State<AppPage> {
   CameraController? _controller;
   Future<void>? _initializeControllerFuture;
   bool _isCameraReady = false;
+  // Add these new variables
+  final _firestore = FirebaseFirestore.instance;
+  int _points = 0;
+  Set<String> _scannedItems = {};
+  DateTime _lastResetDate = DateTime.now();
 
   // Initialize Gemini
   final model = GenerativeModel(
@@ -137,6 +142,36 @@ class _AppPageState extends State<AppPage> {
                           children: [
                             // Logo más pequeño
                             AnimatedLogo(size: 30),
+                            SizedBox(width: AppDimensions.paddingSmall),
+                            // Add points counter here
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: AppDimensions.paddingSmall,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isDarkMode ? Colors.amber.withOpacity(0.2) : Colors.amber.shade100,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                    size: 20,
+                                  ),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    '$_points pts',
+                                    style: TextStyle(
+                                      color: isDarkMode ? Colors.amber : Colors.amber.shade900,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             SizedBox(width: AppDimensions.paddingSmall),
                             // Texto con Expanded para que se ajuste al espacio disponible
                             Expanded(
