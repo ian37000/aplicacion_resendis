@@ -8,6 +8,7 @@ import 'package:project_resendis/styles/app_theme.dart';
 import 'package:project_resendis/widgets/settings_button.dart';
 //un lefsito
 //Hola luis
+//hola evan
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
