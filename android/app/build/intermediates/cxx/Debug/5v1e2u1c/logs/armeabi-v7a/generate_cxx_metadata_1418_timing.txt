@@ -1,6 +1,3 @@
-# C/C++ build system timings
-generate_cxx_metadata
-  [gap of 15ms]
-  create-invalidation-state 14ms
-generate_cxx_metadata completed in 37ms
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:e335ddf652aedef800c54c79a7fa6fc6172da179a4771360feac6556202bc41e
+size 141

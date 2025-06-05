@@ -1,20 +1,3 @@
-@echo off
-"C:\\Users\\PC GAMER\\AppData\\Local\\Android\\sdk\\cmake\\3.22.1\\bin\\cmake.exe" ^
-  "-HD:\\Flutter\\src\\flutter\\packages\\flutter_tools\\gradle\\src\\main\\groovy" ^
-  "-DCMAKE_SYSTEM_NAME=Android" ^
-  "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON" ^
-  "-DCMAKE_SYSTEM_VERSION=21" ^
-  "-DANDROID_PLATFORM=android-21" ^
-  "-DANDROID_ABI=x86_64" ^
-  "-DCMAKE_ANDROID_ARCH_ABI=x86_64" ^
-  "-DANDROID_NDK=C:\\Users\\PC GAMER\\AppData\\Local\\Android\\sdk\\ndk\\26.3.11579264" ^
-  "-DCMAKE_ANDROID_NDK=C:\\Users\\PC GAMER\\AppData\\Local\\Android\\sdk\\ndk\\26.3.11579264" ^
-  "-DCMAKE_TOOLCHAIN_FILE=C:\\Users\\PC GAMER\\AppData\\Local\\Android\\sdk\\ndk\\26.3.11579264\\build\\cmake\\android.toolchain.cmake" ^
-  "-DCMAKE_MAKE_PROGRAM=C:\\Users\\PC GAMER\\AppData\\Local\\Android\\sdk\\cmake\\3.22.1\\bin\\ninja.exe" ^
-  "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=D:\\projects\\project_resendis\\android\\app\\build\\intermediates\\cxx\\Debug\\5v1e2u1c\\obj\\x86_64" ^
-  "-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=D:\\projects\\project_resendis\\android\\app\\build\\intermediates\\cxx\\Debug\\5v1e2u1c\\obj\\x86_64" ^
-  "-DCMAKE_BUILD_TYPE=Debug" ^
-  "-BD:\\projects\\project_resendis\\android\\app\\.cxx\\Debug\\5v1e2u1c\\x86_64" ^
-  -GNinja ^
-  -Wno-dev ^
-  --no-warn-unused-cli
+version https://git-lfs.github.com/spec/v1
+oid sha256:5bf2acd5091156162a6c9dda4a9f99465c6c7dffa6aae8fc1952482674099a8d
+size 1266

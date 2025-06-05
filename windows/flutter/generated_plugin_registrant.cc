@@ -1,17 +1,3 @@
-//
-//  Generated file. Do not edit.
-//
-
-// clang-format off
-
-#include "generated_plugin_registrant.h"
-
-#include <cloud_firestore/cloud_firestore_plugin_c_api.h>
-#include <firebase_core/firebase_core_plugin_c_api.h>
-
-void RegisterPlugins(flutter::PluginRegistry* registry) {
-  CloudFirestorePluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("CloudFirestorePluginCApi"));
-  FirebaseCorePluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("FirebaseCorePluginCApi"));
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:01ba067bd8e328cb803dff00b0aef64fcf92e1aa8110baa7c83542671419eb01
+size 506

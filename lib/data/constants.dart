@@ -1,10 +1,3 @@
-import 'package:flutter/material.dart';
-
-class KTextStyle {
-  static const TextStyle titleTealText = TextStyle(
-    color: Colors.teal,
-    fontSize: 18.0,
-    fontWeight: FontWeight.bold,
-  );
-  static const TextStyle descriptionText = TextStyle(fontSize: 16.0);
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c56722989262a201ad04eea4e4585b740c1c531c0bf404b48634ea138d778010
+size 276

@@ -1,20 +1,3 @@
-import 'package:flutter/material.dart';
-
-class AppTextStyles {
-  static const TextStyle heading1 = TextStyle(
-    fontSize: 32,
-    fontWeight: FontWeight.bold,
-    letterSpacing: -1.5,
-  );
-  
-  static const TextStyle heading2 = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.w600,
-    letterSpacing: -0.5,
-  );
-  
-  static const TextStyle bodyText = TextStyle(
-    fontSize: 16,
-    letterSpacing: 0.5,
-  );
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:2a936e6cb02733e16919c43a512327fec1140fdf841365951d7312a29b32a4df
+size 439

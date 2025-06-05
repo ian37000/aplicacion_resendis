@@ -1,11 +1,3 @@
-# C/C++ build system timings
-generate_cxx_metadata
-  execute-generate-process
-    [gap of 34ms]
-    exec-configure 9080ms
-    [gap of 29ms]
-  execute-generate-process completed in 9143ms
-  [gap of 41ms]
-  write-metadata-json-to-file 16ms
-generate_cxx_metadata completed in 9218ms
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:9d895fadeff3dcdb53387e33534d4c5bd6182ff927b1a53af35f02b3b5bcce18
+size 281

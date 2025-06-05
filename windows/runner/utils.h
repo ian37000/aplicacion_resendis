@@ -1,19 +1,3 @@
-#ifndef RUNNER_UTILS_H_
-#define RUNNER_UTILS_H_
-
-#include <string>
-#include <vector>
-
-// Creates a console for the process, and redirects stdout and stderr to
-// it for both the runner and the Flutter library.
-void CreateAndAttachConsole();
-
-// Takes a null-terminated wchar_t* encoded in UTF-16 and returns a std::string
-// encoded in UTF-8. Returns an empty std::string on failure.
-std::string Utf8FromUtf16(const wchar_t* utf16_string);
-
-// Gets the command line arguments passed in as a std::vector<std::string>,
-// encoded in UTF-8. Returns an empty std::vector<std::string> on failure.
-std::vector<std::string> GetCommandLineArguments();
-
-#endif  // RUNNER_UTILS_H_
+version https://git-lfs.github.com/spec/v1
+oid sha256:832e246b6758253f89016fb0374b30791242e97ad950d27fc678b3d9feacfdc4
+size 691
